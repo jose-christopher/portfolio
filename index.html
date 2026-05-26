@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jose Christopher S — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0b0f;
+  --sidebar-bg: #0d0f14;
+  --card-bg: #111318;
+  --card-bg2: #16191f;
+  --accent: #00d4ff;
+  --accent2: #7c5cfc;
+  --text: #f0f2f8;
+  --text2: #8b92a8;
+  --text3: #555d73;
+  --border: rgba(255,255,255,0.07);
+  --border-a: rgba(0,212,255,0.22);
+  --sidebar-w: 230px;
+  --topbar-h: 56px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100%;
+}
+
+/* ══════════════════════════════
+   DESKTOP LAYOUT
+══════════════════════════════ */
+#sidebar {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-top {
+  padding: 24px 18px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-photo {
+  width: 56px; height: 56px;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--border-a);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.sidebar-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.25;
+}
+
+.sidebar-role {
+  font-size: 10.5px;
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 3px;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text2);
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.15s, color 0.15s;
+  border: 1px solid transparent;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover { background: rgba(0,212,255,0.06); color: var(--text); }
+.nav-item.active { background: rgba(0,212,255,0.1); border-color: var(--border-a); color: var(--accent); }
+.nav-icon { font-size: 14px; width: 18px; text-align: center; }
+
+.sidebar-bottom {
+  padding: 12px 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sb-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.sb-link:hover { color: var(--accent); background: rgba(0,212,255,0.06); }
+.sb-link svg { width: 13px; height: 13px; flex-shrink: 0; stroke: currentColor; fill: none; stroke-width: 2; }
+
+/* Main content area — desktop */
+#main {
+  margin-left: var(--sidebar-w);
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ══════════════════════════════
+   MOBILE TOP BAR (hidden on desktop)
+══════════════════════════════ */
+#topbar {
+  display: none;
+}
+
+/* ══════════════════════════════
+   MOBILE BOTTOM NAV (hidden on desktop)
+══════════════════════════════ */
+#bottomnav {
+  display: none;
+}
+
+/* ══════════════════════════════
+   PAGES
+══════════════════════════════ */
+.page {
+  display: none;
+  padding: 40px 44px;
+  animation: fadein 0.22s ease;
+}
+.page.active { display: block; }
+
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ══════════════════════════════
+   SHARED COMPONENTS
+══════════════════════════════ */
+.page-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--accent);
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.page-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 26px;
+}
+.page-title span { color: var(--accent); }
+
+.divider { height: 1px; background: var(--border); margin: 30px 0; }
+
+.page-footer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: var(--text3);
+}
+
+/* ── HOME ── */
+.home-hero {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2.5rem;
+  align-items: start;
+  margin-bottom: 28px;
+}
+
+.home-greeting {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: blink 1.5s ease infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+.home-name {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 14px;
+}
+.home-name span { color: var(--accent); }
+
+.home-desc {
+  color: var(--text2);
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 500px;
+  margin-bottom: 22px;
+}
+
+.home-pic {
+  width: 160px; height: 160px;
+  max-width: 160px; max-height: 160px;
+  border-radius: 14px;
+  object-fit: cover;
+  object-position: center top;
+  border: 2px solid var(--border-a);
+  flex-shrink: 0;
+  display: block;
+}
+
+.home-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.btn-p {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--accent); color: #000;
+  padding: 10px 20px; border-radius: 8px;
+  font-weight: 600; font-size: 13px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-p:hover { opacity: 0.85; transform: translateY(-1px); }
+
+.btn-o {
+  display: inline-flex; align-items: center; gap: 7px;
+  border: 1px solid var(--border-a); color: var(--accent);
+  padding: 10px 20px; border-radius: 8px;
+  font-weight: 500; font-size: 13px;
+  text-decoration: none; background: none; cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Space Grotesk', sans-serif;
+}
+.btn-o:hover { background: rgba(0,212,255,0.08); }
+
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.stat-box {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.stat-num { font-size: 1.7rem; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; line-height: 1; }
+.stat-lbl { font-size: 11.5px; color: var(--text3); margin-top: 4px; }
+
+/* ── ABOUT ── */
+.about-body { color: var(--text2); line-height: 1.8; font-size: 14px; }
+.about-body p { margin-bottom: 14px; }
+.tag {
+  display: inline-block;
+  background: rgba(0,212,255,0.08);
+  border: 1px solid var(--border-a);
+  color: var(--accent);
+  border-radius: 6px;
+  padding: 3px 11px;
+  font-size: 12px;
+  margin: 3px;
+}
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 13px;
+}
+.skill-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+.skill-label {
+  font-size: 10.5px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.pill {
+  display: inline-block;
+  background: var(--card-bg2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  border-radius: 6px;
+  padding: 3px 10px;
+  font-size: 12px;
+  margin: 3px 3px 0 0;
+}
+
+/* ── EXPERIENCE ── */
+.timeline { position: relative; padding-left: 24px; }
+.timeline::before {
+  content: '';
+  position: absolute; left: 0; top: 8px; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+.tl-item { position: relative; margin-bottom: 34px; }
+.tl-item::before {
+  content: '';
+  position: absolute; left: -24px; top: 7px;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0,212,255,0.15);
+}
+.tl-row { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 6px; margin-bottom: 3px; }
+.tl-role { font-weight: 600; font-size: 0.95rem; }
+.tl-date {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); background: rgba(0,212,255,0.08);
+  border: 1px solid var(--border-a); border-radius: 100px; padding: 2px 11px;
+}
+.tl-company { color: var(--text2); font-size: 13px; margin-bottom: 4px; }
+.tl-stack { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text3); margin-bottom: 9px; }
+.tl-list { list-style: none; }
+.tl-list li { color: var(--text2); font-size: 13.5px; padding: 4px 0 4px 18px; position: relative; }
+.tl-list li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+
+/* ── PROJECTS ── */
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+}
+.proj-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 18px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.proj-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  opacity: 0; transition: opacity 0.2s;
+}
+.proj-card:hover { border-color: var(--border-a); transform: translateY(-3px); }
+.proj-card:hover::before { opacity: 1; }
+.proj-icon { font-size: 1.3rem; margin-bottom: 7px; }
+.proj-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 3px; }
+.proj-stack { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--accent); margin-bottom: 7px; }
+.proj-desc { color: var(--text2); font-size: 13px; line-height: 1.6; }
+
+/* ── RESEARCH ── */
+.research-list { display: flex; flex-direction: column; gap: 11px; }
+.research-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent2);
+  border-radius: 10px;
+  padding: 15px 18px;
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.r-year { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent2); min-width: 52px; margin-top: 2px; }
+.r-title { font-weight: 600; font-size: 0.88rem; margin-bottom: 3px; }
+.r-sub { font-size: 11px; color: var(--text3); margin-left: 5px; font-weight: 400; }
+.r-desc { color: var(--text2); font-size: 13px; line-height: 1.6; }
+
+/* ── EDUCATION ── */
+.edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.edu-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 13px;
+  padding: 20px;
+  position: relative; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+a.edu-card { cursor: pointer; }
+a.edu-card:hover { border-color: var(--border-a); transform: translateY(-2px); }
+.edu-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+}
+.edu-deg { font-weight: 600; font-size: 0.9rem; margin-bottom: 4px; }
+.edu-col { color: var(--text2); font-size: 13px; margin-bottom: 10px; }
+.edu-yr {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  color: var(--accent); background: rgba(0,212,255,0.08);
+  border: 1px solid var(--border-a); border-radius: 100px;
+  padding: 2px 11px; display: inline-block;
+}
+
+/* ── CERT ── */
+.cert-item {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  max-width: 400px;
+}
+.cert-icon { font-size: 1.4rem; }
+.cert-name { font-weight: 600; font-size: 14px; }
+.cert-issuer { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+/* ── CONTACT ── */
+.contact-intro { color: var(--text2); font-size: 14px; line-height: 1.8; max-width: 500px; margin-bottom: 24px; }
+.contact-cards { display: flex; flex-direction: column; gap: 11px; max-width: 420px; }
+.contact-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 15px 18px;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.2s, background 0.2s;
+}
+.contact-card:hover { border-color: var(--border-a); background: rgba(0,212,255,0.04); }
+.contact-card-icon {
+  width: 36px; height: 36px;
+  background: rgba(0,212,255,0.1);
+  border: 1px solid var(--border-a);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.contact-card-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; }
+.contact-card-label { font-size: 11px; color: var(--text3); margin-bottom: 2px; }
+.contact-card-val { font-size: 13.5px; font-weight: 500; }
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≤900px): sidebar collapses to icons
+══════════════════════════════ */
+@media (max-width: 900px) and (min-width: 601px) {
+  :root { --sidebar-w: 64px; }
+
+  .sidebar-top { padding: 16px 10px; display: flex; flex-direction: column; align-items: center; }
+  .sidebar-photo { width: 40px; height: 40px; margin-bottom: 0; }
+  .sidebar-name, .sidebar-role { display: none; }
+
+  .nav-item { justify-content: center; padding: 10px; }
+  .nav-item span:not(.nav-icon) { display: none; }
+  .nav-icon { width: auto; font-size: 18px; }
+
+  .sb-link { justify-content: center; padding: 8px; }
+  .sb-link span { display: none; }
+  .sb-link svg { width: 16px; height: 16px; }
+
+  .page { padding: 30px 28px; }
+  .home-hero { grid-template-columns: 1fr; gap: 1.5rem; }
+  .home-pic { width: 120px; height: 120px; }
+  .quick-stats { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — MOBILE (≤600px): sidebar hidden, top bar + bottom nav shown
+══════════════════════════════ */
+@media (max-width: 600px) {
+  /* hide desktop sidebar */
+  #sidebar { display: none; }
+
+  /* main takes full width, add padding for top+bottom bars */
+  #main {
+    margin-left: 0;
+    padding-top: var(--topbar-h);
+    padding-bottom: 72px;
+  }
+
+  /* TOP BAR */
+  #topbar {
+    display: flex;
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--topbar-h);
+    background: var(--sidebar-bg);
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    z-index: 200;
+  }
+  .topbar-photo {
+    width: 34px; height: 34px;
+    border-radius: 7px;
+    object-fit: cover;
+    object-position: center top;
+    border: 1.5px solid var(--border-a);
+    flex-shrink: 0;
+  }
+  .topbar-name {
+    font-size: 13.5px;
+    font-weight: 700;
+    flex: 1;
+  }
+  .topbar-links {
+    display: flex;
+    gap: 8px;
+  }
+  .topbar-icon-link {
+    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .topbar-icon-link:hover { color: var(--accent); border-color: var(--border-a); }
+  .topbar-icon-link svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* BOTTOM NAV */
+  #bottomnav {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 60px;
+    background: var(--sidebar-bg);
+    border-top: 1px solid var(--border);
+    z-index: 200;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  #bottomnav::-webkit-scrollbar { display: none; }
+
+  .bnav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    min-width: 60px;
+    flex: 1;
+    padding: 6px 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text3);
+    font-size: 9.5px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    transition: color 0.15s;
+    white-space: nowrap;
+  }
+  .bnav-item.active { color: var(--accent); }
+  .bnav-item .bi { font-size: 18px; line-height: 1; }
+
+  /* PAGE on mobile */
+  .page { padding: 20px 16px 16px; }
+
+  .page-title { font-size: 1.5rem; margin-bottom: 20px; }
+
+  /* Home hero stacks vertically on mobile */
+  .home-hero {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 20px;
+  }
+  .home-pic { width: 90px; height: 90px; margin-bottom: 14px; }
+  .home-name { font-size: 1.7rem; }
+  .quick-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .quick-stats .stat-box:last-child { grid-column: span 2; }
+
+  /* research card flex direction on mobile */
+  .research-card { flex-direction: column; gap: 6px; }
+  .r-year { min-width: unset; }
+
+  /* contact cards full width */
+  .contact-cards { max-width: 100%; }
+  .cert-item { max-width: 100%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ MOBILE TOP BAR (shown only on phones) ══ -->
+<div id="topbar">
+<img
+  class="topbar-photo"
+  src="https://uploads.onecompiler.io/43bga3pkf/44q4a2xn9/jose.jpg.jpeg"
+  alt="Jose Christopher"
+/>
+  <div class="topbar-name">Jose Christopher S</div>
+  <div class="topbar-links">
+    <a href="mailto:sjjose1305@gmail.com" class="topbar-icon-link" title="Email">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/jose-christopher1305/" target="_blank" class="topbar-icon-link" title="LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+    </a>
+    <a href="https://github.com/jose-christopher" target="_blank" class="topbar-icon-link" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.031 1.531 1.031.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+    </a>
+    <a href="tel:+919677860126" class="topbar-icon-link" title="Call">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.83 1.18 2 2 0 012.82 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.98-.98a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+    </a>
+  </div>
+</div>
+
+<!-- ══ DESKTOP / TABLET SIDEBAR ══ -->
+<aside id="sidebar">
+  <div class="sidebar-top">
+<img
+  class="sidebar-photo"
+  src="https://uploads.onecompiler.io/43bga3pkf/44q4a2xn9/jose.jpg.jpeg"
+  alt="Jose Christopher"
+/>   
+    <div>
+      <div class="sidebar-name">Jose Christopher S</div>
+      <div class="sidebar-role">MCA Student · Full Stack Dev</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <button class="nav-item active" onclick="goTo('home')"><span class="nav-icon">🏠</span><span>Home</span></button>
+    <button class="nav-item" onclick="goTo('about')"><span class="nav-icon">👤</span><span>About Me</span></button>
+    <button class="nav-item" onclick="goTo('skills')"><span class="nav-icon">🛠️</span><span>Skills</span></button>
+    <button class="nav-item" onclick="goTo('experience')"><span class="nav-icon">💼</span><span>Experience</span></button>
+    <button class="nav-item" onclick="goTo('projects')"><span class="nav-icon">📂</span><span>Projects</span></button>
+    <button class="nav-item" onclick="goTo('research')"><span class="nav-icon">🔬</span><span>Research</span></button>
+    <button class="nav-item" onclick="goTo('education')"><span class="nav-icon">🎓</span><span>Education</span></button>
+    <button class="nav-item" onclick="goTo('certifications')"><span class="nav-icon">📜</span><span>Certifications</span></button>
+    <button class="nav-item" onclick="goTo('contact')"><span class="nav-icon">✉️</span><span>Contact</span></button>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="mailto:sjjose1305@gmail.com" class="sb-link">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>Email</span>
+    </a>
+    <a href="https://www.linkedin.com/in/jose-christopher1305/" target="_blank" class="sb-link">
+      <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+      <span>LinkedIn</span>
+    </a>
+    <a href="https://github.com/jose-christopher" target="_blank" class="sb-link">
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;flex-shrink:0;"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.031 1.531 1.031.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+      <span>GitHub</span>
+    </a>
+    <a href="tel:+919677860126" class="sb-link">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.83 1.18 2 2 0 012.82 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.98-.98a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      <span>Call</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ══ MAIN CONTENT ══ -->
+<main id="main">
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div class="home-hero">
+      <div>
+        <div class="home-greeting"><span class="dot"></span> Open to work</div>
+        <h1 class="home-name">Hi, I am<br><span>Jose Christopher S</span></h1>
+        <p class="home-desc">I am an MCA student who builds web apps using the MERN stack. I like solving real problems with clean code and good design. Right now I am looking for a job in IT or Data where I can learn and grow.</p>
+        <div class="home-cta">
+          <a class="btn-p" href="mailto:sjjose1305@gmail.com">✉️ Get in Touch</a>
+          <a class="btn-o" href="https://www.linkedin.com/in/jose-christopher1305/" target="_blank">LinkedIn ↗</a>
+          <button class="btn-o" onclick="goTo('projects')">See My Work</button>
+          <a class="btn-o" href="Jose_Christopher_S_Resume.docx" download>
+  📄 Resume
+</a>
+        </div>
+      </div>
+<img
+  class="home-pic"
+  src="https://uploads.onecompiler.io/43bga3pkf/44q4a2xn9/jose.jpg.jpeg"
+  alt="Jose Christopher"
+/>
+    </div>
+    <div class="quick-stats">
+      <div class="stat-box"><div class="stat-num">4+</div><div class="stat-lbl">Projects built</div></div>
+      <div class="stat-box"><div class="stat-num">3</div><div class="stat-lbl">Research &amp; Ideas</div></div>
+      <div class="stat-box"><div class="stat-num">MERN</div><div class="stat-lbl">Main tech stack</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">sjjose1305@gmail.com · +91 96778 60126 · Tiruchirappalli, Tamil Nadu</div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="page" id="page-about">
+    <div class="page-tag">// about me</div>
+    <h2 class="page-title">A little about <span>myself</span></h2>
+    <div class="about-body">
+      <p>⚫ Hi, I’m Jose Christopher — an MCA student with a background in B.Com Computer Applications. I’m passionate about technology, design, and building digital experiences that solve real problems.</p>
+<p>⚫ I enjoy working on web development, UI/UX design, and creative projects that combine both technical and business thinking. I’m currently learning and building projects using HTML, CSS, JavaScript, and modern development tools while improving my skills in Full Stack Development and Data-related fields.</p>
+<p>⚫ Apart from academics, I’ve actively participated in organizing and managing college events. I have hosted multiple college and department programs as a Master of Ceremony and also served in hospitality teams, which helped me improve my communication, leadership, teamwork, and event management skills.</p>
+<p>⚫ I love creating clean, user-friendly, and visually attractive interfaces. My goal is to start my career in the IT industry where I can learn continuously, contribute to impactful projects, and grow as a developer and designer.</p>
+      <p>⚫ Right now I am working as a Full Stack Developer Intern building a real web app to help colleges manage assets — using React, Node, and MongoDB. I enjoy finding smart ways to solve everyday problems and my goal is to get a job in IT or Data where I can do meaningful work and keep growing.</p>
+      <div style="margin-top:20px;">
+        <p style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:JetBrains Mono,monospace;letter-spacing:0.1em;">LANGUAGES I SPEAK</p>
+        <span class="tag">Tamil — My first language</span>
+        <span class="tag">English — Work level</span>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · About</div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="page" id="page-skills">
+    <div class="page-tag">// skills</div>
+    <h2 class="page-title">What I know how to <span>do</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-label">Coding Languages</div>
+        <span class="pill">Python</span><span class="pill">C</span><span class="pill">C++</span><span class="pill">R</span>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label">Web &amp; App Building</div>
+        <span class="pill">HTML</span><span class="pill">CSS</span><span class="pill">JavaScript</span><span class="pill">Flutter</span>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label">Databases</div>
+        <span class="pill">SQL</span><span class="pill">MongoDB</span><span class="pill">DBMS</span>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label">Tools &amp; Software</div>
+        <span class="pill">Git</span><span class="pill">VS Code</span><span class="pill">Tally Prime</span><span class="pill">MS Excel</span>
+      </div>
+      <div class="skill-card">
+        <div class="skill-label">Design Tools</div>
+        <span class="pill">Figma</span><span class="pill">Canva</span><span class="pill">Photoshop</span>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Skills</div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="page" id="page-experience">
+    <div class="page-tag">// work experience</div>
+    <h2 class="page-title">Where I have <span>worked</span></h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-row">
+          <div class="tl-role">Full Stack Developer Intern</div>
+          <div class="tl-date">May 2026</div>
+        </div>
+        <div class="tl-company">Frontier Wox Tech Pvt. Ltd.</div>
+        <div class="tl-stack">React.js · Node.js · Express.js · MongoDB · JWT</div>
+        <ul class="tl-list">
+          <li>Built a web app to help colleges track their assets digitally instead of using paper. Different users like Admin, HOD, Lab In-charge, and Staff each have their own access and view.</li>
+          <li>Created the back-end APIs with Node.js and Express.js and added login security using JWT. Also built a system where users can request assets and get them approved step by step.</li>
+          <li>Built separate dashboards for each type of user and a reports section. Hosted the front end on Vercel and the back end on Render with MongoDB storing all the data.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-row">
+          <div class="tl-role">Assistant Merchandiser</div>
+          <div class="tl-date">May 2024</div>
+        </div>
+        <div class="tl-company">BAAS Exports, Tiruppur</div>
+        <ul class="tl-list">
+          <li>Helped coordinate export orders and production schedules so that goods reached buyers on time.</li>
+          <li>Kept in touch with buyers and made sure the quality and delivery of all products met their requirements.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Experience</div>
+  </div>
+
+  <!-- PROJECTS -->
+  <div class="page" id="page-projects">
+    <div class="page-tag">// projects</div>
+    <h2 class="page-title">Things I have <span>built</span></h2>
+    <div class="proj-grid">
+      <a class="proj-card" href="https://jose-christopher.github.io/portfolio/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+        <div class="proj-icon">🌐</div>
+        <div class="proj-name">Personal Portfolio Website</div>
+        <div class="proj-stack">HTML · CSS</div>
+        <div class="proj-desc">A simple website to show my work, skills, and certificates. Made it work properly on mobile and desktop screens.</div>
+        <div class="edu-yr" style="margin-top:8px;">Visit ↗</div>
+      </a>
+      <div class="proj-card">
+        <div class="proj-icon">🌤️</div>
+        <div class="proj-name">Weather App</div>
+        <div class="proj-stack">Flutter · Firebase</div>
+        <div class="proj-desc">A mobile app that shows current weather for any city you search. Shows temperature, humidity, and weather conditions with a clean look.</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">🕐</div>
+        <div class="proj-name">Clock App</div>
+        <div class="proj-stack">Python · Flutter</div>
+        <div class="proj-desc">A simple app that shows the current time live. Built this to practice how to update things on screen automatically.</div>
+      </div>
+      <div class="proj-card">
+        <div class="proj-icon">❤️</div>
+        <div class="proj-name">Interactive Valentine Website</div>
+        <div class="proj-stack">HTML · CSS · JavaScript</div>
+        <div class="proj-desc">A fun themed web page with moving animations. Built using basic JavaScript to control what happens when you click or hover.</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Projects</div>
+  </div>
+
+  <!-- RESEARCH -->
+  <div class="page" id="page-research">
+    <div class="page-tag">// research &amp; innovation</div>
+    <h2 class="page-title">Study and <span>ideas</span></h2>
+    <div class="research-list">
+      <div class="research-card">
+        <div class="r-year">2025–26</div>
+        <div>
+          <div class="r-title">AI in Recruitment — Research Paper <span class="r-sub">Team of 5</span></div>
+          <div class="r-desc">Looked into how AI is being used in hiring — from sorting applications to helping companies pick better candidates with less bias.</div>
+        </div>
+      </div>
+      <div class="research-card">
+        <div class="r-year">2024–25</div>
+        <div>
+          <div class="r-title">Impacts of Digital Payment — Research Paper <span class="r-sub">Individual</span></div>
+          <div class="r-desc">Studied how digital payments like UPI and mobile wallets have changed how people and businesses handle money in India.</div>
+        </div>
+      </div>
+      <div class="research-card">
+        <div class="r-year">2026</div>
+        <div>
+          <div class="r-title">R-CUBED — Business Idea <span class="r-sub">Team of 5</span></div>
+          <div class="r-desc">Came up with a business plan around reducing waste — focused on reduce, reuse, and recycle. Presented this idea at a college event.</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Research</div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="page" id="page-education">
+    <div class="page-tag">// education</div>
+    <h2 class="page-title">Where I <span>studied</span></h2>
+    <div class="edu-grid">
+      <a class="edu-card" href="https://www.sjctni.edu/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+        <div class="edu-deg">Master of Computer Applications (MCA)</div>
+        <div class="edu-col">St. Joseph's College, Tiruchirappalli</div>
+        <div class="edu-yr">2025 — Currently studying</div>
+        <div class="edu-yr" style="margin-top:8px;">Visit ↗</div>
+      </a>
+      <a class="edu-card" href="https://www.sjctni.edu/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+        <div class="edu-deg">B.Com — Computer Applications</div>
+        <div class="edu-col">St. Joseph's College, Tiruchirappalli</div>
+        <div class="edu-yr">2022 — 2025</div>
+        <div class="edu-yr" style="margin-top:8px;">Visit ↗</div>
+        </a>
+      <a class="edu-card" href="https://www.infantjesustiruppur.com/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+        <div class="edu-deg">HSC</div>
+        <div class="edu-col">Infant Jesus Matric Hr Sec School</div>
+        <div class="edu-yr">2021 — 2022</div>
+        <div class="edu-yr" style="margin-top:8px;">Visit ↗</div>
+        </a>
+      <a class="edu-card" href="https://www.infantjesustiruppur.com/" target="_blank" style="text-decoration:none;color:inherit;display:block;">
+        <div class="edu-deg">SSLC</div>
+        <div class="edu-col">Infant Jesus Matric Hr Sec School</div>
+        <div class="edu-yr">2019 — 2020</div>
+        <div class="edu-yr" style="margin-top:8px;">Visit ↗</div>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Education</div>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <div class="page" id="page-certifications">
+    <div class="page-tag">// certifications</div>
+    <h2 class="page-title">What I have <span>completed</span></h2>
+    <div class="cert-item">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">Database Management System</div>
+        <div class="cert-issuer">SWAYAM NPTEL</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Certifications</div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="page" id="page-contact">
+    <div class="page-tag">// contact</div>
+    <h2 class="page-title">Let us <span>talk</span></h2>
+    <p class="contact-intro">I am open to entry-level jobs in IT and Data. If you have a role that might be a good fit, or just want to say hi — feel free to reach out using any of the options below.</p>
+    <div class="contact-cards">
+      <a href="mailto:sjjose1305@gmail.com" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-card-label">Send me an email</div>
+          <div class="contact-card-val">sjjose1305@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/jose-christopher1305" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <div class="contact-card-label">Connect on LinkedIn</div>
+          <div class="contact-card-val">linkedin.com/in/jose-christopher1305</div>
+        </div>
+      </a>
+      <a href="https://github.com/jose-christopher" target="_blank" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24" fill="var(--accent)" style="width:16px;height:16px;"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.342-3.369-1.342-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.031 1.531 1.031.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844a9.59 9.59 0 012.504.337c1.909-1.296 2.747-1.026 2.747-1.026.546 1.378.203 2.397.1 2.65.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.942.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        </div>
+        <div>
+          <div class="contact-card-label">Check out my code</div>
+          <div class="contact-card-val">github.com/jose-christopher</div>
+        </div>
+      </a>
+      <a href="tel:+919677860126" class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.82 19.79 19.79 0 01.83 1.18 2 2 0 012.82 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l.98-.98a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div>
+          <div class="contact-card-label">Call or WhatsApp</div>
+          <div class="contact-card-val">+91 96778 60126</div>
+        </div>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="page-footer">Jose Christopher S · Tiruchirappalli, Tamil Nadu</div>
+  </div>
+
+</main>
+
+<!-- ══ MOBILE BOTTOM NAV ══ -->
+<div id="bottomnav">
+  <button class="bnav-item active" onclick="goTo('home')"><span class="bi">🏠</span>Home</button>
+  <button class="bnav-item" onclick="goTo('about')"><span class="bi">👤</span>About</button>
+  <button class="bnav-item" onclick="goTo('skills')"><span class="bi">🛠️</span>Skills</button>
+  <button class="bnav-item" onclick="goTo('experience')"><span class="bi">💼</span>Work</button>
+  <button class="bnav-item" onclick="goTo('projects')"><span class="bi">📂</span>Projects</button>
+  <button class="bnav-item" onclick="goTo('research')"><span class="bi">🔬</span>Research</button>
+  <button class="bnav-item" onclick="goTo('education')"><span class="bi">🎓</span>Study</button>
+  <button class="bnav-item" onclick="goTo('certifications')"><span class="bi">📜</span>Certs</button>
+  <button class="bnav-item" onclick="goTo('contact')"><span class="bi">✉️</span>Contact</button>
+</div>
+
+<script>
+function goTo(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.bnav-item').forEach(n => n.classList.remove('active'));
+
+  document.getElementById('page-' + id).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
+      n.classList.add('active');
+    }
+  });
+  document.querySelectorAll('.bnav-item').forEach(n => {
+    if (n.getAttribute('onclick') && n.getAttribute('onclick').includes("'" + id + "'")) {
+      n.classList.add('active');
+    }
+  });
+
+  document.getElementById('main').scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
