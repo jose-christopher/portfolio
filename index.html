@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jose Christopher S · Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="antigravity-app">
+
+  <!-- Sticky Navigation -->
+  <nav>
+    <div class="w">
+      <div class="nav-inner">
+        <a class="logo" href="#top">J<i>C</i></a>
+
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#experience">Experience</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav-actions">
+          <button class="btn p" id="navResumeBtn" title="Download full Jose Christopher resume">📄 Resume</button>
+          <button class="btn g" id="viewBioBtn" title="Quick View Resume">View Bio</button>
+          <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile slide-down menu (filled by script.js) -->
+    <div id="mobileNavSlot"></div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="top">
+    <div class="bl a"></div>
+    <div class="bl b"></div>
+    <div class="bl c"></div>
+
+    <div class="w">
+      <div class="rv">
+        <span class="tag-hand">Hello, I’m Jose Christopher S</span>
+        <h1>Learning, <em> trying,</em> creating.</h1>
+        <p class="lead">I am an MCA student with a strong foundation in Computer Applications and Commerce, skilled in computer applications and commerce . I like solving real problems with clean code and good design. Right now I am looking for a job in IT or Data where I can learn and grow.</p>
+        <div class="btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a class="btn p" href="#work">View Selected Work</a>
+          <button class="btn accent" id="heroCvBtn">Download CV (.txt)</button>
+          <a class="btn g" href="#contact">Get in Touch</a>
+        </div>
+
+        <div class="hero-socials">
+          <span>📍 Tiruchirappalli, TN</span>
+          <span>•</span>
+          <a href="https://www.linkedin.com/in/jose-christopher1305/" target="_blank" rel="noreferrer">LinkedIn</a>
+          <span>•</span>
+          <a href="https://github.com/jose-christopher" target="_blank" rel="noreferrer">GitHub</a>
+          <span>•</span>
+          <a href="tel:+91 96778 60126">+91 96778 60126</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Infinite Marquee Ticker -->
+  <div class="mq">
+    <div class="mq-track" id="ticker"></div>
+  </div>
+
+  <!-- Section 1: Featured Interactive Slider -->
+  <section id="work">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Selected work</small>
+          <h2>Projects, one slide at a time</h2>
+        </div>
+      </div>
+
+      <div class="rv">
+        <div class="sl">
+          <div class="tr" id="slideTrack"></div>
+        </div>
+        <div class="ctl" id="slideCtl"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Complete Projects Catalog -->
+  <section id="projects" style="background:color-mix(in srgb, var(--card) 40%, var(--bg))">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Catalog</small>
+          <h2>All Project Works &amp; Experiments</h2>
+        </div>
+        <div class="filter-row" id="filterRow"></div>
+      </div>
+
+      <div class="g3" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section 3: Technical Skills Matrix -->
+  <section id="skills">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Toolkit</small>
+          <h2>What I know &amp; build with</h2>
+        </div>
+      </div>
+      <div class="g3" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section 4: Work Experience & Internships -->
+  <section id="experience" style="background:color-mix(in srgb, var(--card) 45%, var(--bg))">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Timeline</small>
+          <h2>Experience &amp; Practical Roles</h2>
+        </div>
+      </div>
+      <div class="timeline" id="timeline"></div>
+    </div>
+  </section>
+
+  <!-- Section 5: Research & Innovation -->
+  <section id="research">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Analysis &amp; Papers</small>
+          <h2>Research, Studies &amp; Business Ideas</h2>
+        </div>
+      </div>
+      <div class="g3" id="researchGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section 6: Education & Background -->
+  <section id="education" style="background:color-mix(in srgb, var(--card) 30%, var(--bg))">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Academia</small>
+          <h2>Where I studied and grew</h2>
+        </div>
+      </div>
+      <div class="g3" id="educationGrid"></div>
+    </div>
+  </section>
+
+  <!-- Section 7: Certifications & Leadership -->
+  <section id="about">
+    <div class="w">
+      <div class="rv">
+        <div class="sh">
+          <small>Credentials</small>
+          <h2> co curricular &amp; Campus Leadership</h2>
+        </div>
+      </div>
+
+      <div class="g3" style="margin-bottom:32px">
+        <div class="rv">
+          <div class="cd">
+            <div class="dot-badge" style="background:var(--pink)">⭐</div>
+            <span class="y">Student Governance</span>
+            <h3>Student Secretary, Shift I</h3>
+            <p>St. Joseph's College, Tiruchirappalli. Spearheaded student coordination, represented the student council, and assisted examination control duties.</p>
+          </div>
+        </div>
+
+        <div class="rv">
+          <div class="cd">
+            <div class="dot-badge" style="background:var(--org)">🎤</div>
+            <span class="y">Public Speaking</span>
+            <h3>Master of Ceremonies</h3>
+            <p>Hosted college symposia and academic conventions, coordinating hospitality and stage decorum with strong verbal communication.</p>
+          </div>
+        </div>
+
+        <div class="rv">
+          <div class="cd">
+            <div class="dot-badge" style="background:var(--red);color:var(--bg)">🗣️</div>
+            <span class="y">Languages</span>
+            <h3>Communication</h3>
+            <p>Tamil (Native Speaker) &amp; English (Professional Working Proficiency) with business correspondence capabilities.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv">
+        <h3 style="margin-bottom:16px">Earned Credentials</h3>
+        <div class="g3" id="certGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: Contact & Call to Action -->
+  <section id="contact">
+    <div class="w">
+      <div class="rv">
+        <div class="ct">
+          <h2>Let's connect and make things happen.</h2>
+          <div class="btns" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+            <a class="btn p" href="mailto:sjjose1305@gmail.com">✉️ sjjose1305@gmail.com</a>
+            <a class="btn g" href="https://www.linkedin.com/in/jose-christopher1305/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+            <a class="btn g" href="https://github.com/jose-christopher" target="_blank" rel="noreferrer">GitHub ↗</a>
+            <a class="btn g" href="tel:+91 96778 60126">📞 +91 96778 60126</a>
+            <button class="btn accent" id="contactResumeBtn">Download Resume</button>
+          </div>
+
+          <div style="margin-top:28px;font-size:14px;color:var(--pink);opacity:.85">
+            Tiruchirappalli, Tamil Nadu, India · Available for immediate relocation or remote work
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="w">
+      <p>© 2026 Jose Christopher S · </p>
+    </div>
+  </footer>
+
+  <!-- Bio / Printable Resume Modal (filled by script.js) -->
+  <div id="modalSlot"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
